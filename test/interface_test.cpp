@@ -7,23 +7,7 @@
 #include <vector>
 #include <memory>
 
-// void startInterface(std::vector<std::shared_ptr<Parameter>> params) {
-//     std::vector<Component> sliders;
-//     for(int i = 0; i<params.size(); i++) {
-//         sliders.push_back(params[i]->getSlider());
-//     }
-//     auto container = Container::Vertical(sliders);
-//     auto renderer = Renderer(container, [&]{
-//         Elements elements;
-//         for(int i = 0; i<params.size(); i++) {
-//             elements.push_back(params[i]->getElement());
-//         }
-//         return window(text(L"Lúbadh"), vbox(elements)) | size(WIDTH, LESS_THAN, 80) | color(Color::RGB(224, 196, 144)) | bgcolor(Color::RGB(1, 1, 1)) | bold;
-//     });
-//     auto screen = ScreenInteractive::TerminalOutput();
-//     screen.Loop(renderer);
-// };
-
+//* IDs for referencing params array */
 enum param_ids {
     inputLevel_id,
     outputLevel_id,
@@ -52,9 +36,12 @@ int main(){
     
     Interface interface;
     
-    interface.start(L"Arbhar", params);
+    test::check(&interface);
 
-    std::cout << params[outputLevel_id]->getValue();
+    /* Uncomment to start interface loop */
+    // interface.start(L"Lubadh", params);
+
+    test::check(params[outputLevel_id]->getValue(), 127, 0);
 
     return 0;
 }
