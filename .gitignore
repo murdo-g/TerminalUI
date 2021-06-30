@@ -30,3 +30,22 @@
 *.exe
 *.out
 *.app
+
+# Dependecies
+_deps/*
+
+# Built files
+build/
+
+# CMake Files
+CMakeFiles/
+*.cmake
+compile_commands.json
+CMakeCache.txt
+CMakeDoxyfile.in
+
+# Makefile
+Makefile
+
+# Test binaries
+test/bin/
