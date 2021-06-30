@@ -29,7 +29,7 @@ class GoldGoldSliderBase : public ComponentBase {
         Focused() ? color(Color::RGB(224, 196, 144)) | bgcolor(Color::RGB(1, 1, 1))  : color(Color::RGB(200, 164, 120)) | bgcolor(Color::RGB(1, 1, 1)) ;
     float percent = float(*value_ - min_) / float(max_ - min_);
     return hbox({
-               text(*label_) | vcenter | size(WIDTH, EQUAL, 12),
+               text(*label_) | vcenter | size(WIDTH, EQUAL, 18),
                hbox({
                    text(L"["),
                    gauge(percent) | underlined | xflex | reflect(gauge_box_),

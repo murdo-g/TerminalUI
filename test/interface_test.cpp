@@ -1,5 +1,5 @@
-// #include "../src/interface.h"
-#include "../src/parameter.h"
+#include "../src/interface.h"
+// #include "../src/parameter.h"
 #include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
 #include "unit_test_framework.h"
 #include <iostream>
@@ -7,29 +7,32 @@
 #include <vector>
 #include <memory>
 
-void startInterface(std::vector<std::shared_ptr<Parameter>> params) {
-    std::vector<Component> sliders;
-    for(int i = 0; i<params.size(); i++) {
-        sliders.push_back(params[i]->getSlider());
-    }
-    auto container = Container::Vertical(sliders);
-    auto renderer = Renderer(container, [&]{
-        Elements elements;
-        for(int i = 0; i<params.size(); i++) {
-            elements.push_back(params[i]->getElement());
-        }
-        return window(text(L"Instruo"), vbox(elements)) | size(WIDTH, LESS_THAN, 80) | color(Color::RGB(224, 196, 144)) | bgcolor(Color::RGB(1, 1, 1));
-    });
-    auto screen = ScreenInteractive::TerminalOutput();
-    screen.Loop(renderer);
-};
+// void startInterface(std::vector<std::shared_ptr<Parameter>> params) {
+//     std::vector<Component> sliders;
+//     for(int i = 0; i<params.size(); i++) {
+//         sliders.push_back(params[i]->getSlider());
+//     }
+//     auto container = Container::Vertical(sliders);
+//     auto renderer = Renderer(container, [&]{
+//         Elements elements;
+//         for(int i = 0; i<params.size(); i++) {
+//             elements.push_back(params[i]->getElement());
+//         }
+//         return window(text(L"Lúbadh"), vbox(elements)) | size(WIDTH, LESS_THAN, 80) | color(Color::RGB(224, 196, 144)) | bgcolor(Color::RGB(1, 1, 1)) | bold;
+//     });
+//     auto screen = ScreenInteractive::TerminalOutput();
+//     screen.Loop(renderer);
+// };
 
 enum param_ids {
-    coarse_id,
-    fine_id,
-    dutycycle_id,
-    amplitude_id,
-    fm_id,
+    inputLevel_id,
+    outputLevel_id,
+    speed_id,
+    length_id,
+    start_id,
+    time_id,
+    auxInputCrossFade_id,
+    auxOutputCrossFade_id,
     num_params
 };
 
@@ -38,13 +41,20 @@ int main(){
     
     std::vector<std::shared_ptr<Parameter>> params(num_params);
     
-    params[coarse_id]           =   std::make_shared<Parameter>("Coarse", -10, 10, 2);
-    params[fine_id]             =   std::make_shared<Parameter>("Fine", 0, 20, 5);
-    params[dutycycle_id]        =   std::make_shared<Parameter>("Duty Cycle", -30, 30, 2);
-    params[amplitude_id]        =   std::make_shared<Parameter>("Amplitude", -30, 30, 2);
-    params[fm_id]               =   std::make_shared<Parameter>("FM", -30, 30, 2);
+    params[inputLevel_id] = std::make_shared<Parameter>("Input Level", 0, 255, 1);
+    params[outputLevel_id] = std::make_shared<Parameter>("Output Level", 0, 255, 1);
+    params[speed_id] = std::make_shared<Parameter>("Speed", 0, 255, 1);
+    params[length_id] = std::make_shared<Parameter>("Length", 0, 255, 1);
+    params[start_id] = std::make_shared<Parameter>("Start", 0, 255, 1);
+    params[time_id] = std::make_shared<Parameter>("Time", 0, 255, 1);
+    params[auxInputCrossFade_id] = std::make_shared<Parameter>("Aux In Crossfade", 0, 255, 1);
+    params[auxOutputCrossFade_id] = std::make_shared<Parameter>("Aux Out Crossfade", 0, 255, 1);
     
-    startInterface(params);
+    Interface interface;
+    
+    interface.start(L"Arbhar", params);
+
+    std::cout << params[outputLevel_id]->getValue();
 
     return 0;
 }

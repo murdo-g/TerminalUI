@@ -1,21 +1,27 @@
-// #include "interface.h"
+#include "interface.h"
 
-// using namespace ftxui;
+using namespace ftxui;
 
-// Interface::Interface(std::vector<Parameter> &params) {
-//     std::vector<Component> sliders;
-//     std::vector<Element> elements;
-//     for(int i = 0; i<params.size(); i++) {
-//         sliders.push_back(params[i].getSlider());
-//         elements.push_back(params[i].getElement());
-//         elements.push_back(separator() | color(Color::RGB(224, 196, 144)) | bgcolor(Color::RGB(1, 1, 1)));
-//     }
+void Interface::start(std::wstring title, std::vector<std::shared_ptr<Parameter>> params) {
+    std::vector<Component> sliders;
+    for(int i = 0; i<params.size(); i++) {
+        sliders.push_back(params[i]->getSlider());
+    }
+    container = Container::Vertical(sliders);
+    renderer = Renderer(container, [&]{
+        Elements elements;
+        for(int i = 0; i<params.size(); i++) {
+            elements.push_back(params[i]->getElement());
+        }
+        return window(text(title), vbox(elements)) 
+            | size(WIDTH, LESS_THAN, 80) 
+            | color(Color::RGB(224, 196, 144)) 
+            | bgcolor(Color::RGB(1, 1, 1)) 
+            | bold;
+    });
+    screen.Loop(renderer);
+};
 
-//     container = Container::Vertical(sliders);
-//     renderer = Renderer(container, [&] {
-//         return vbox(elements) | border | size(WIDTH, LESS_THAN, 80);
-//     });
-// };
-
-// void Interface::start() {
-// };
+void Interface::stop() {
+    screen.ExitLoopClosure();
+}
