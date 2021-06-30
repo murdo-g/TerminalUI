@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 
-//* IDs for referencing params array */
+/* IDs for referencing params array */
 enum param_ids {
     inputLevel_id,
     outputLevel_id,

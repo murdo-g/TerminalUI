@@ -28,7 +28,11 @@ public:
 
     ~Interface() = default;
 
+    /** Starts the interface 
+     * will loop continuously until @ref stop is called
+     */
     void start(std::wstring title, std::vector<std::shared_ptr<Parameter>> params);
 
+    /** Stops the interface loop */
     void stop();
 };
