@@ -23,6 +23,6 @@ Element AdcSim::getElement() {
 Parameter::Parameter(const std::string name_, const float min_, const float max_, const float def_, const int res_) : 
     name(name_), min(min_), max(max_), def(def_), res(res_) {
     value = def;
-    int adcMax = std::pow(2, res);
+    int adcMax = pow(2, res);
     adc = std::make_shared<AdcSim>(name, 0, adcMax, 1);
 };
