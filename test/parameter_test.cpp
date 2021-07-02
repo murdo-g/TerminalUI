@@ -4,7 +4,7 @@
 
 int main(){
     /* Test defaults */
-    Parameter defaultParam;
+    AdcSim defaultParam;
     test::check(defaultParam.getMin(), 0, 0);
     test::check(defaultParam.getMax(), 255, 0);
     test::check(defaultParam.getInc(), 1, 0);
@@ -12,7 +12,7 @@ int main(){
     test::check(defaultParam.getValue(), 127, 0);
 
     /* Test custom args */
-    Parameter customParam("custom", -10, 10, 3);
+    AdcSim customParam("custom", -10, 10, 3);
     test::check(customParam.getMin(), -10, 0);
     test::check(customParam.getMax(), 10, 0);
     test::check(customParam.getInc(), 3, 0);

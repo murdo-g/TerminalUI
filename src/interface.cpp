@@ -15,6 +15,7 @@ void Interface::start(std::wstring title, std::vector<std::shared_ptr<Parameter>
         }
         return window(text(title), vbox(elements)) 
             | size(WIDTH, LESS_THAN, 80) 
+            | size(HEIGHT, EQUAL, params.size())
             | color(Color::RGB(224, 196, 144)) 
             | bgcolor(Color::RGB(1, 1, 1)) 
             | bold;

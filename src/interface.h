@@ -22,7 +22,7 @@ private:
 
 public:
     /** Screen to display interface */
-    ScreenInteractive screen = ScreenInteractive::TerminalOutput();
+    ScreenInteractive screen = ScreenInteractive::Fullscreen();
 
     Interface() = default;
 

@@ -25,23 +25,25 @@ int main(){
     
     std::vector<std::shared_ptr<Parameter>> params(num_params);
     
-    params[inputLevel_id] = std::make_shared<Parameter>("Input Level", 0, 255, 1);
-    params[outputLevel_id] = std::make_shared<Parameter>("Output Level", 0, 255, 1);
-    params[speed_id] = std::make_shared<Parameter>("Speed", 0, 255, 1);
-    params[length_id] = std::make_shared<Parameter>("Length", 0, 255, 1);
-    params[start_id] = std::make_shared<Parameter>("Start", 0, 255, 1);
-    params[time_id] = std::make_shared<Parameter>("Time", 0, 255, 1);
-    params[auxInputCrossFade_id] = std::make_shared<Parameter>("Aux In Crossfade", 0, 255, 1);
-    params[auxOutputCrossFade_id] = std::make_shared<Parameter>("Aux Out Crossfade", 0, 255, 1);
+    params[inputLevel_id] = std::make_shared<Parameter>("Input Level", 0.0, 1.0, 0.5, 8);
+    params[outputLevel_id] = std::make_shared<Parameter>("Output Level", 0.0, 1.0, 0.5, 8);
+    params[speed_id] = std::make_shared<Parameter>("Speed", 0.0, 1.0, 0.5, 8);
+    params[length_id] = std::make_shared<Parameter>("Length", 0.0, 1.0, 0.5, 8);
+    params[start_id] = std::make_shared<Parameter>("Start", 0.0, 1.0, 0.5, 8);
+    params[time_id] = std::make_shared<Parameter>("Time", 0.0, 1.0, 0.5, 8);
+    params[auxInputCrossFade_id] = std::make_shared<Parameter>("Aux In Crossfade", 0.0, 1.0, 0.5, 8);
+    params[auxOutputCrossFade_id] = std::make_shared<Parameter>("Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
     
     Interface interface;
     
     test::check(&interface);
 
     /* Uncomment to start interface loop */
-    // interface.start(L"Lubadh", params);
+    interface.start(L"Lubadh", params);
 
-    test::check(params[outputLevel_id]->getValue(), 127, 0);
+    // test::check(params[outputLevel_id]->getValue(), 127, 0);
+
+    // std::cout << "\n" << params[inputLevel_id]->getValue();
 
     return 0;
 }
