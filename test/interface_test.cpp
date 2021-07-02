@@ -36,8 +36,6 @@ int main(){
     
     Interface interface;
     
-    test::check(&interface);
-
     /* Uncomment to start interface loop */
     interface.start(L"Lubadh", params);
 
