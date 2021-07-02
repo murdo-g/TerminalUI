@@ -42,6 +42,7 @@ public:
         const std::string name_ = "", 
         const int min_ = 0,   // bits
         const int max_ = 255,
+        const int initial_ = 127,
         const int inc_ = 1
     );
     
