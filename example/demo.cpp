@@ -1,5 +1,4 @@
 #include "../src/interface.h"
-// #include "../src/parameter.h"
 #include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
 #include "unit_test_framework.h"
 #include <iostream>

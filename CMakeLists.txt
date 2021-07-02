@@ -95,3 +95,21 @@ foreach(testSrc ${TEST_SRCS})
         COMMAND ${testName}
     )
 endforeach(testSrc)
+
+project(demo
+  LANGUAGES CXX
+  VERSION 1.0.0
+)
+
+add_executable(demo example/demo.cpp)
+ 
+target_link_libraries(demo
+    PUBLIC
+    ${LIB_NAME}
+    PRIVATE ftxui::screen
+    PRIVATE ftxui::dom
+    PRIVATE ftxui::component # Not needed for this example.
+)
+ 
+# C++17 is used. We requires fold expressions at least.
+set_target_properties(demo PROPERTIES CXX_STANDARD 17)
