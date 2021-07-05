@@ -31,7 +31,7 @@ private:
     int value;
 
     /** Processed value to display */
-    float outputVal;
+    float *outputVal;
 
     /** Slider component */
     Component slider;
@@ -44,7 +44,7 @@ public:
         const int max_,
         const int initial_,
         const int inc_,
-        float &outputVal_
+        float *outputVal_
     );
     
     /** Destructor */

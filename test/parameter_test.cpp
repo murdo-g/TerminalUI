@@ -5,7 +5,7 @@
 int main(){
     float testVal = 5.f;
     /* Test custom args */
-    AdcSim customParam("custom", -10, 10, 3, 1, testVal);
+    AdcSim customParam("custom", -10, 10, 3, 1, &testVal);
     test::check(customParam.getMin(), -10, 0);
     test::check(customParam.getMax(), 10, 0);
     test::check(customParam.getInc(), 3, 0);
