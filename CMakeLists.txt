@@ -96,14 +96,14 @@ foreach(testSrc ${TEST_SRCS})
     )
 endforeach(testSrc)
 
-project(demo
+project(terminalui-demo
   LANGUAGES CXX
   VERSION 1.0.0
 )
 
-add_executable(demo example/demo.cpp)
+add_executable(terminalui-demo example/demo.cpp)
  
-target_link_libraries(demo
+target_link_libraries(terminalui-demo
     PUBLIC
     ${LIB_NAME}
     PRIVATE ftxui::screen
@@ -112,4 +112,4 @@ target_link_libraries(demo
 )
  
 # C++17 is used. We requires fold expressions at least.
-set_target_properties(demo PROPERTIES CXX_STANDARD 17)
+set_target_properties(terminalui-demo PROPERTIES CXX_STANDARD 17)

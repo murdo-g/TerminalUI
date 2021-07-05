@@ -51,4 +51,4 @@ Makefile
 test/bin/
 
 # Demo binary
-demo
+terminalui-demo
