@@ -118,9 +118,7 @@ public:
     inline std::string getName(){return name;};
     
     /** Return float paramater value */
-    float getValue() {
-        return min + ((float)adc->getValue() - (float)adc->getMin()) 
-        / ((float)adc->getMax() - (float)adc->getMin()) * (max - min);};
+    float getValue();
 
     /** Return the raw integer @ref value */
     inline int getRawADCVal() {return adc->getValue();}
