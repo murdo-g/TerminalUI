@@ -49,3 +49,6 @@ Makefile
 
 # Test binaries
 test/bin/
+
+# Demo binary
+demo
