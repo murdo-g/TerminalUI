@@ -3,16 +3,9 @@
 #include <iostream>
 
 int main(){
-    /* Test defaults */
-    AdcSim defaultParam;
-    test::check(defaultParam.getMin(), 0, 0);
-    test::check(defaultParam.getMax(), 255, 0);
-    test::check(defaultParam.getInc(), 1, 0);
-    test::check(defaultParam.getName() == "");
-    test::check(defaultParam.getValue(), 127, 0);
-
+    float testVal = 5.f;
     /* Test custom args */
-    AdcSim customParam("custom", -10, 10, 3);
+    AdcSim customParam("custom", -10, 10, 3, 1, testVal);
     test::check(customParam.getMin(), -10, 0);
     test::check(customParam.getMax(), 10, 0);
     test::check(customParam.getInc(), 3, 0);

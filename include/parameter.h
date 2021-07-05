@@ -30,20 +30,21 @@ private:
     /** Raw integer value */
     int value;
 
+    /** Processed value to display */
+    float outputVal;
+
     /** Slider component */
     Component slider;
 
 public:
-    /** Constructor: default arguements are 8-bit resolution and empty name 
-     *  @param name_ Name of AdcSim
-     *  @param resolution_ Resolution (bits) of AdcSim
-    */
+    /** Constructor: default arguements are 8-bit resolution and empty name */
     AdcSim(
-        const std::string name_ = "", 
-        const int min_ = 0,   // bits
-        const int max_ = 255,
-        const int initial_ = 127,
-        const int inc_ = 1
+        const std::string name_, 
+        const int min_,
+        const int max_,
+        const int initial_,
+        const int inc_,
+        float &outputVal_
     );
     
     /** Destructor */
@@ -116,10 +117,13 @@ public:
     /** Return the @ref name of the @ref Parameter */
     inline std::string getName(){return name;};
     
-    /** Return the raw integer @ref value */
+    /** Return float paramater value */
     inline float getValue() {
         return min + ((float)adc->getValue() - (float)adc->getMin()) 
         / ((float)adc->getMax() - (float)adc->getMin()) * (max - min);};
+
+    /** Return the raw integer @ref value */
+    inline int getRawADCVal() {return adc->getValue();}
 
     /** Return the @ref min of the @ref Parameter */
     inline float getMin(){return min;};

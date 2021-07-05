@@ -38,9 +38,5 @@ int main(){
     /* Uncomment to start interface loop */
     interface.start(L"Lubadh", params);
 
-    // test::check(params[outputLevel_id]->getValue(), 127, 0);
-
-    // std::cout << "\n" << params[inputLevel_id]->getValue();
-
     return 0;
 }
