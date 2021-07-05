@@ -28,3 +28,9 @@ Parameter::Parameter(const std::string name_, const float min_, const float max_
     int initial = (def - min) / (max - min) * adcMax;
     adc = std::make_shared<AdcSim>(name, 0, adcMax, initial, 1, value);
 };
+
+float Parameter::getValue() {
+    value = min + ((float)adc->getValue() - (float)adc->getMin()) 
+        / ((float)adc->getMax() - (float)adc->getMin()) * (max - min);
+    return value;
+}
