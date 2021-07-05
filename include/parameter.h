@@ -118,7 +118,7 @@ public:
     inline std::string getName(){return name;};
     
     /** Return float paramater value */
-    inline float getValue() {
+    float getValue() {
         return min + ((float)adc->getValue() - (float)adc->getMin()) 
         / ((float)adc->getMax() - (float)adc->getMin()) * (max - min);};
 
