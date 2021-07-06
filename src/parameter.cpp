@@ -2,13 +2,12 @@
 #include "goldslider.cpp"
 #include <math.h>
 
-
 using namespace ftxui;
 
-AdcSim::AdcSim(const std::string name_, const int min_, const int max_, const int initial_, const int inc_, float *outputVal_) : 
+AdcSim::AdcSim(const std::wstring name_, const int min_, const int max_, const int initial_, const int inc_, float *outputVal_) : 
     name(name_), min(min_), max(max_), inc(inc_), outputVal(outputVal_) {
     value = initial_;
-    slider = GoldSlider(StringRef(name.c_str()), &value, min, max, inc);
+    slider = GoldSlider(name, &value, min, max, inc);
 };
 
 Element AdcSim::getElement() {
@@ -21,7 +20,7 @@ Element AdcSim::getElement() {
     return box;
 };
 
-Parameter::Parameter(const std::string name_, const float min_, const float max_, const float def_, const int res_) : 
+Parameter::Parameter(const std::wstring name_, const float min_, const float max_, const float def_, const int res_) : 
     name(name_), min(min_), max(max_), def(def_), res(res_) {
     value = def;
     int adcMax = pow(2, res);
