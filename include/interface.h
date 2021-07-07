@@ -45,6 +45,8 @@ public:
     /** Configure a parameter */
     void configParam(const int param_id, std::wstring name_, float min_, float max_, float def_, int res_);
 
+    inline std::vector<std::shared_ptr<Parameter>> getParams(){return params;};
+
     /** Add a monitor variable */
     void addMonitorVariable(std::wstring name_, float* var);
 
