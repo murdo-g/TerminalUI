@@ -39,7 +39,8 @@ build/
 
 # CMake Files
 CMakeFiles/
-*.cmake
+cmake_install.cmake
+CTestTestfile.cmake
 compile_commands.json
 CMakeCache.txt
 CMakeDoxyfile.in
