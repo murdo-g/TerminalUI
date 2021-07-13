@@ -21,22 +21,24 @@ enum param_ids {
 
 
 int main(){
+        
+    float speed = 2.f, length = 0.5f;
+
+    Interface interface(L"Lubadh", num_params);
+
+    interface.configParam(inputLevel_id, L"Input Level", 0.0, 1.0, 0.7, 8);
+    interface.configParam(outputLevel_id, L"Output Level", 0.0, 1.0, 0.2, 8);
+    interface.configParam(speed_id, L"Speed", 0.0, 1.0, 0.9, 8);
+    interface.configParam(length_id, L"Length", 0.0, 1.0, 0.1, 8);
+    interface.configParam(start_id, L"Start", 0.0, 1.0, 0.3, 8);
+    interface.configParam(time_id, L"Time", 0.0, 1.0, 0.5555, 8);
+    interface.configParam(auxInputCrossFade_id, L"Aux In Crossfade", 0.0, 1.0, 0.75, 8);
+    interface.configParam(auxOutputCrossFade_id, L"Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
     
-    std::vector<std::shared_ptr<Parameter>> params(num_params);
-    
-    params[inputLevel_id] = std::make_shared<Parameter>("Input Level", 0.0, 1.0, 0.7, 8);
-    params[outputLevel_id] = std::make_shared<Parameter>("Output Level", 0.0, 1.0, 0.2, 8);
-    params[speed_id] = std::make_shared<Parameter>("Speed", 0.0, 1.0, 0.9, 8);
-    params[length_id] = std::make_shared<Parameter>("Length", 0.0, 1.0, 0.1, 8);
-    params[start_id] = std::make_shared<Parameter>("Start", 0.0, 1.0, 0.3, 8);
-    params[time_id] = std::make_shared<Parameter>("Time", 0.0, 1.0, 0.5555, 8);
-    params[auxInputCrossFade_id] = std::make_shared<Parameter>("Aux In Crossfade", 0.0, 1.0, 0.75, 8);
-    params[auxOutputCrossFade_id] = std::make_shared<Parameter>("Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
-    
-    Interface interface;
-    
-    /* Uncomment to start interface loop */
-    interface.start(L"Lubadh", params);
+    interface.addMonitorVariable(L"Speed processed: ", &speed);
+    interface.addMonitorVariable(L"Length processed: ", &length);
+
+    interface.start();
 
     return 0;
 }

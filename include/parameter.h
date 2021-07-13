@@ -16,7 +16,7 @@ using namespace ftxui;
 class AdcSim {
 private:
     /** Name of the @ref AdcSim */
-    std::string name;
+    std::wstring name;
 
     /** Minimum value of @ref AdcSim */
     int min;
@@ -39,7 +39,7 @@ private:
 public:
     /** Constructor: default arguements are 8-bit resolution and empty name */
     AdcSim(
-        const std::string name_, 
+        const std::wstring name_, 
         const int min_,
         const int max_,
         const int initial_,
@@ -51,7 +51,7 @@ public:
     ~AdcSim() = default;
 
     /** Return the @ref name of the @ref AdcSim */
-    inline std::string getName(){return name;};
+    inline std::wstring getName(){return name;};
     
     /** Return the raw integer @ref value */
     inline int getValue(){return value;};
@@ -76,7 +76,7 @@ public:
 class Parameter {
 private:
     /** Name of the @ref Parameter */
-    std::string name;
+    std::wstring name;
 
     /** Minimum value of @ref Parameter */
     float min;
@@ -104,7 +104,7 @@ public:
      *  @param def_ Default value of slider 
     */
     Parameter(
-        const std::string name_, 
+        const std::wstring name_, 
         const float min_,
         const float max_,
         const float def_,
@@ -115,7 +115,7 @@ public:
     ~Parameter() = default;
 
     /** Return the @ref name of the @ref Parameter */
-    inline std::string getName(){return name;};
+    inline std::wstring getName(){return name;};
     
     /** Return float paramater value */
     float getValue();

@@ -20,18 +20,35 @@ private:
     /** Renderer component to render interface */
     Component renderer;
 
+    /** Vector of shared pointers to Parameters */
+    std::vector<std::shared_ptr<Parameter>> params;
+
+    /** Vector of additional floats to monitor */
+    std::vector<Element> monitorVariables;
+
+    std::wstring title;
+
 public:
     /** Screen to display interface */
     ScreenInteractive screen = ScreenInteractive::Fullscreen();
 
-    Interface() = default;
+    /** Constructor */
+    Interface(std::wstring title, const int NUM_PARAMS);
 
     ~Interface() = default;
 
     /** Starts the interface 
      * will loop continuously until @ref stop is called
      */
-    void start(std::wstring title, std::vector<std::shared_ptr<Parameter>> params);
+    void start();
+
+    /** Configure a parameter */
+    void configParam(const int param_id, std::wstring name_, float min_, float max_, float def_, int res_);
+
+    inline std::vector<std::shared_ptr<Parameter>> getParams(){return params;};
+
+    /** Add a monitor variable */
+    void addMonitorVariable(std::wstring name_, float* var);
 
     /** Stops the interface loop */
     void stop();
