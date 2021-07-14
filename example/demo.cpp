@@ -46,7 +46,7 @@ int main(){
 
     interface.configToggle(monitoring_mode_id,  L"Monitoring Mode :         ", {L"on", L"arm", L"off"});
     interface.configToggle(time_pot_func_id,    L"Time Pot Functionality:   ", {L"clk div", L"tape decay", L"windowing"});
-    interface.configToggle(play_mode_id,        L"Play Mode:               ", {L"looping", L"one-shot"});
+    interface.configToggle(play_mode_id,        L"Play Mode:                ", {L"looping", L"one-shot"});
     interface.configToggle(rec_mode_id,         L"Record Mode:              ", {L"looping", L"one-shot"});
     interface.configToggle(punch_in_mode_id,    L"Punch In Record:          ", {L"on", L"off"});
 
