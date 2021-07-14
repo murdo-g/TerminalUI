@@ -19,12 +19,21 @@ enum param_ids {
     num_params
 };
 
+enum toggle_ids {
+    monitoring_mode_id,
+    time_pot_func_id,
+    play_mode_id,
+    rec_mode_id,
+    punch_in_mode_id,
+    num_toggles
+};
+
 
 int main(){
         
     float speed = 2.f, length = 0.5f;
 
-    Interface interface(L"Lubadh", num_params);
+    Interface interface(L"Lubadh", num_params, num_toggles);
 
     interface.configParam(inputLevel_id, L"Input Level", 0.0, 1.0, 0.7, 8);
     interface.configParam(outputLevel_id, L"Output Level", 0.0, 1.0, 0.2, 8);
@@ -34,9 +43,15 @@ int main(){
     interface.configParam(time_id, L"Time", 0.0, 1.0, 0.5555, 8);
     interface.configParam(auxInputCrossFade_id, L"Aux In Crossfade", 0.0, 1.0, 0.75, 8);
     interface.configParam(auxOutputCrossFade_id, L"Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
-    
-    interface.addMonitorVariable(L"Speed processed: ", &speed);
-    interface.addMonitorVariable(L"Length processed: ", &length);
+
+    interface.configToggle(monitoring_mode_id,  L"Monitoring Mode :         ", {L"on", L"arm", L"off"});
+    interface.configToggle(time_pot_func_id,    L"Time Pot Functionality:   ", {L"clk div", L"tape decay", L"windowing"});
+    interface.configToggle(play_mode_id,        L"Play Mode:               ", {L"looping", L"one-shot"});
+    interface.configToggle(rec_mode_id,         L"Record Mode:              ", {L"looping", L"one-shot"});
+    interface.configToggle(punch_in_mode_id,    L"Punch In Record:          ", {L"on", L"off"});
+
+    // interface.addMonitorVariable(L"Speed processed: ", &speed);
+    // interface.addMonitorVariable(L"Length processed: ", &length);
 
     interface.start();
 

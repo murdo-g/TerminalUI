@@ -3,13 +3,18 @@
 using namespace ftxui;
 
 
-Interface::Interface(std::wstring title_, const int numParams) {
+Interface::Interface(std::wstring title_, const int numParams, const int NUM_TOGGLES) {
     title = title_;
     params.resize(numParams);
+    toggles.resize(NUM_TOGGLES);
 };
 
 void Interface::configParam(const int param_id, std::wstring name_, float min_, float max_, float def_, int res_) {
     params[param_id] = std::make_shared<Parameter>(name_, min_, max_, def_, res_);
+};
+
+void Interface::configToggle(const int toggle_id, std::wstring name_, std::vector<std::wstring> options_) {
+    toggles[toggle_id] = std::make_shared<InstruoToggle>(name_, options_);
 };
 
 void Interface::addMonitorVariable(std::wstring name_, float* var) {
@@ -17,15 +22,24 @@ void Interface::addMonitorVariable(std::wstring name_, float* var) {
 };
 
 void Interface::start() {
-    std::vector<Component> sliders;
+    std::vector<Component> controls;
     for(int i = 0; i<params.size(); i++) {
-        sliders.push_back(params[i]->getSlider());
+        controls.push_back(params[i]->getSlider());
     }
-    container = Container::Vertical(sliders);
+    for(int i = 0; i<toggles.size(); i++) {
+        controls.push_back(toggles[i]->getToggle());
+    }
+    container = Container::Vertical(controls);
     renderer = Renderer(container, [&]{
         Elements elements;
         for(int i = 0; i<params.size(); i++) {
             elements.push_back(params[i]->getElement());
+        }
+        elements.push_back(separator());
+
+        // elements.push_back(toggles[0]->getElement());
+        for(int i = 0; i<toggles.size(); i++) {
+            elements.push_back(toggles[i]->getElement());
         }
 
         elements.push_back(separator());
