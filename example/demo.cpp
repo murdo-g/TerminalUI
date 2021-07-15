@@ -28,12 +28,21 @@ enum toggle_ids {
     num_toggles
 };
 
+enum button_ids {
+    record_id,
+    erase_id,
+    retrig_id,
+    save_id,
+    load_id,
+    usb_export_id,
+    usb_import_id,
+    num_buttons
+};
+
 
 int main(){
-        
-    float speed = 2.f, length = 0.5f;
 
-    Interface interface(L"Lubadh", num_params, num_toggles);
+    Interface interface(L"Lubadh", num_params, num_toggles, num_buttons);
 
     interface.configParam(inputLevel_id, L"Input Level", 0.0, 1.0, 0.7, 8);
     interface.configParam(outputLevel_id, L"Output Level", 0.0, 1.0, 0.2, 8);
@@ -44,14 +53,20 @@ int main(){
     interface.configParam(auxInputCrossFade_id, L"Aux In Crossfade", 0.0, 1.0, 0.75, 8);
     interface.configParam(auxOutputCrossFade_id, L"Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
 
+    // std::function<void()> empty = []() {;};
+    interface.configButton(record_id, L"Record", [](){;});
+    interface.configButton(erase_id, L"Erase", [](){;});
+    interface.configButton(retrig_id, L"Retrig", [](){;});
+    interface.configButton(save_id, L"Save", [](){;});
+    interface.configButton(load_id, L"Load", [](){;});
+    interface.configButton(usb_export_id, L"USB Export", [](){;});
+    interface.configButton(usb_import_id, L"USB Import", [](){;});
+
     interface.configToggle(monitoring_mode_id,  L"Monitoring Mode :         ", {L"on", L"arm", L"off"});
     interface.configToggle(time_pot_func_id,    L"Time Pot Functionality:   ", {L"clk div", L"tape decay", L"windowing"});
     interface.configToggle(play_mode_id,        L"Play Mode:                ", {L"looping", L"one-shot"});
     interface.configToggle(rec_mode_id,         L"Record Mode:              ", {L"looping", L"one-shot"});
     interface.configToggle(punch_in_mode_id,    L"Punch In Record:          ", {L"on", L"off"});
-
-    // interface.addMonitorVariable(L"Speed processed: ", &speed);
-    // interface.addMonitorVariable(L"Length processed: ", &length);
 
     interface.start();
 

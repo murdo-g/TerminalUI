@@ -1,5 +1,6 @@
 #include "parameter.h"
 #include "toggle.h"
+#include "instruobutton.h"
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"       // for Slider, Renderer, Vertical
 #include "ftxui/component/component_base.hpp"  // for ComponentBase
@@ -27,6 +28,9 @@ private:
     /** Vector of shared pointers to Toggles */
     std::vector<std::shared_ptr<InstruoToggle>> toggles;
 
+    /** Vector of shared pointers to Buttons */
+    std::vector<std::shared_ptr<InstruoButton>> buttons;
+
     /** Vector of additional floats to monitor */
     std::vector<Element> monitorVariables;
 
@@ -37,7 +41,7 @@ public:
     ScreenInteractive screen = ScreenInteractive::Fullscreen();
 
     /** Constructor */
-    Interface(std::wstring title, const int NUM_PARAMS, const int NUM_TOGGLES);
+    Interface(std::wstring title, const int NUM_PARAMS, const int NUM_TOGGLES, const int NUM_BUTTONS);
 
     ~Interface() = default;
 
@@ -51,6 +55,9 @@ public:
 
     /** Configure a toggle */
     void configToggle(const int toggle_id, std::wstring name_, std::vector<std::wstring> options_);
+
+    /** Configure a toggle */
+    void configButton(const int button_id, std::wstring name_, std::function<void()> on_click_);
 
     /** Return Parameters */
     inline std::vector<std::shared_ptr<Parameter>> getParams(){return params;};
