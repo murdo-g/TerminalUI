@@ -6,9 +6,9 @@ InstruoButton::InstruoButton(const std::wstring label_, std::function<void()> on
     auto button_option = ButtonOption();
     button_option.border = true;
     label = label_;
-    button = Button(label, on_click_, &button_option);
+    button = Button(L"[" + label + L"]", on_click_, &button_option);
 };
 
-Element InstruoButton::getElement() {    
+Element InstruoButton::getElement() {
     return hbox(button->Render());
 };

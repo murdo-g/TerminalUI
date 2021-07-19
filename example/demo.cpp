@@ -8,14 +8,10 @@
 
 /* IDs for referencing params array */
 enum param_ids {
-    inputLevel_id,
-    outputLevel_id,
     speed_id,
     length_id,
-    start_id,
-    time_id,
-    auxInputCrossFade_id,
-    auxOutputCrossFade_id,
+    start_pos_id,
+    time_pot_id,
     num_params
 };
 
@@ -44,23 +40,18 @@ int main(){
 
     Interface interface(L"Lubadh", num_params, num_toggles, num_buttons);
 
-    interface.configParam(inputLevel_id, L"Input Level", 0.0, 1.0, 0.7, 8);
-    interface.configParam(outputLevel_id, L"Output Level", 0.0, 1.0, 0.2, 8);
-    interface.configParam(speed_id, L"Speed", 0.0, 1.0, 0.9, 8);
-    interface.configParam(length_id, L"Length", 0.0, 1.0, 0.1, 8);
-    interface.configParam(start_id, L"Start", 0.0, 1.0, 0.3, 8);
-    interface.configParam(time_id, L"Time", 0.0, 1.0, 0.5555, 8);
-    interface.configParam(auxInputCrossFade_id, L"Aux In Crossfade", 0.0, 1.0, 0.75, 8);
-    interface.configParam(auxOutputCrossFade_id, L"Aux Out Crossfade", 0.0, 1.0, 0.5, 8);
+    interface.configParam(speed_id, L"Speed", -4.0, 4.0, 1.0, 12);
+    interface.configParam(length_id, L"Length", 0.0, 1.0, 0.5, 12);
+    interface.configParam(start_pos_id, L"Start Position", 0.0, 1.0, 0.5, 12);
+    interface.configParam(time_pot_id, L"Time", 0.0, 1.0, 0.5, 12);
 
-    // std::function<void()> empty = []() {;};
-    interface.configButton(record_id, L"Record", [](){;});
-    interface.configButton(erase_id, L"Erase", [](){;});
-    interface.configButton(retrig_id, L"Retrig", [](){;});
-    interface.configButton(save_id, L"Save", [](){;});
-    interface.configButton(load_id, L"Load", [](){;});
-    interface.configButton(usb_export_id, L"USB Export", [](){;});
-    interface.configButton(usb_import_id, L"USB Import", [](){;});
+    interface.configButton(record_id, L"Record", [&](){;});
+    interface.configButton(erase_id, L"Erase", [&](){;});
+    interface.configButton(retrig_id, L"Retrig", [&](){;});
+    interface.configButton(save_id, L"Save", [&](){;});
+    interface.configButton(load_id, L"Load", [&](){;});
+    interface.configButton(usb_export_id, L"USB Export", [&](){;});
+    interface.configButton(usb_import_id, L"USB Import", [&](){;});
 
     interface.configToggle(monitoring_mode_id,  L"Monitoring Mode :         ", {L"on", L"arm", L"off"});
     interface.configToggle(time_pot_func_id,    L"Time Pot Functionality:   ", {L"clk div", L"tape decay", L"windowing"});
