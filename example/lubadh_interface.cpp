@@ -7,7 +7,7 @@
 #include <thread>   // for sleep_for, thread
 #include <utility>  // for move
 #include <vector>   // for vector
-#include <filesystem>
+#include <experimental/filesystem>
 
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"  // for Checkbox, Renderer, Horizontal, Vertical, Input, Menu, Radiobox, Tab, Toggle
@@ -46,7 +46,7 @@ int main(int argc, const char* argv[]) {
             time_slider,
         });
 
-        Component sliderRenderer = Renderer(sliderContainer, [&] {
+        Component sliderRenderer = Renderer(sliderContainer, [this](){
             Element box = vbox({
                 hbox({                
                     speed_slider->Render(),
@@ -73,13 +73,13 @@ int main(int argc, const char* argv[]) {
 
         bool record=0, erase=0;
 
-        Component record_button = Button(L"[RECORD]", [&] {record = !record;}, &button_option);
-        Component erase_button = Button(L"[ERASE]", [&] {erase = !erase;}, &button_option);
-        Component retrig_button = Button(L"[RETRIG]", [&] {}, &button_option);
-        Component save_button = Button(L"[SAVE]", [&] {}, &button_option);
-        Component load_button = Button(L"[LOAD]", [&] {}, &button_option);
-        Component export_button = Button(L"[USB EXPORT]", [&] {}, &button_option);
-        Component import_button = Button(L"[USB IMPORT]", [&] {}, &button_option);
+        Component record_button = Button(L"[RECORD]", [this] {record = !record;}, &button_option);
+        Component erase_button = Button(L"[ERASE]", [this] {erase = !erase;}, &button_option);
+        Component retrig_button = Button(L"[RETRIG]", [this] {}, &button_option);
+        Component save_button = Button(L"[SAVE]", [this] {}, &button_option);
+        Component load_button = Button(L"[LOAD]", [this] {}, &button_option);
+        Component export_button = Button(L"[USB EXPORT]", [this] {}, &button_option);
+        Component import_button = Button(L"[USB IMPORT]", [this] {}, &button_option);
 
         Component buttonContainer = Container::Vertical({
             record_button,
@@ -91,7 +91,7 @@ int main(int argc, const char* argv[]) {
             import_button,
         });
 
-        Component buttonRenderer = Renderer(sliderContainer, [&] {
+        Component buttonRenderer = Renderer(sliderContainer, [this] {
             Element box = vbox({ 
                 record_button->Render(),
                 erase_button->Render(),
@@ -131,7 +131,7 @@ int main(int argc, const char* argv[]) {
             punch_in_mode_toggle,
         });
 
-        Component toggleRenderer = Renderer(sliderContainer, [&] {
+        Component toggleRenderer = Renderer(sliderContainer, [this] {
             Element box = vbox({
                 hbox({
                     text(L"Monitoring Mode: "),
@@ -158,7 +158,7 @@ int main(int argc, const char* argv[]) {
         });
 
         /* Runtime Info */
-        Component infoRenderer = Renderer([&]{
+        Component infoRenderer = Renderer([this]{
             Element box = vbox({
                 text(L"Record: "+ std::to_wstring(record)),
                 text(L"Erase: "+ std::to_wstring(erase)),
@@ -172,7 +172,7 @@ int main(int argc, const char* argv[]) {
             toggleContainer,
         });
 
-        Component channelRenderer = Renderer(channelContainer, [&] {
+        Component channelRenderer = Renderer(channelContainer, [this] {
             return vbox({
                 sliderRenderer->Render(),
                 buttonRenderer->Render(),
