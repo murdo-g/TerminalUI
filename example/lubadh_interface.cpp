@@ -7,7 +7,10 @@
 #include <thread>   // for sleep_for, thread
 #include <utility>  // for move
 #include <vector>   // for vector
-#include <experimental/filesystem>
+// #include <experimental/filesystem>
+#include<dirent.h>
+
+#include"loop_display.cpp"
 
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"  // for Checkbox, Renderer, Horizontal, Vertical, Input, Menu, Radiobox, Tab, Toggle
@@ -20,14 +23,37 @@
 
 using namespace ftxui;
 
+
 int main(int argc, const char* argv[]) {
 
     ScreenInteractive screen = ScreenInteractive::Fullscreen();
 
     class ChannelUI {
         public:
+
+        std::vector<std::wstring> filenames;
+        int fileselected = 0;
+
         ChannelUI() {
             button_option.border = false;
+
+            DIR *dir;
+            struct dirent *ent;
+            if ((dir = opendir ("./audio")) != NULL) {
+            /* print all the files and directories within directory */
+                while ((ent = readdir (dir)) != NULL) {
+                    std::string s = ent->d_name;
+                    std::wstring filename(s.begin(), s.end());
+
+                    if(s != "." && s!= "..")
+                        filenames.push_back(filename);
+                }
+            closedir (dir);
+            } else {
+            /* could not open directory */
+            perror ("");
+            }
+            std::sort(filenames.begin(), filenames.end());
         }
         /* Placeholder variables */
         int speed=0, length=0, start_pos=0, time=0;
@@ -81,25 +107,34 @@ int main(int argc, const char* argv[]) {
         Component export_button = Button(L"[USB EXPORT]", [this] {}, &button_option);
         Component import_button = Button(L"[USB IMPORT]", [this] {}, &button_option);
 
-        Component buttonContainer = Container::Vertical({
-            record_button,
-            erase_button,
-            retrig_button,
-            save_button,
-            load_button,
-            export_button,
-            import_button,
+        Component filemenu = Radiobox(&filenames, &fileselected);
+
+        Component buttonContainer = Container::Horizontal({
+            Container::Vertical({
+                record_button,
+                erase_button,
+                retrig_button,
+                save_button,
+                load_button,
+                export_button,
+                import_button,
+            }),
+            filemenu,
         });
 
+
         Component buttonRenderer = Renderer(sliderContainer, [this] {
-            Element box = vbox({ 
-                record_button->Render(),
-                erase_button->Render(),
-                retrig_button->Render(),
-                save_button->Render(),
-                load_button->Render(),
-                export_button->Render(),
-                import_button->Render(),
+            Element box = hbox({
+                vbox({ 
+                    record_button->Render(),
+                    erase_button->Render(),
+                    retrig_button->Render(),
+                    save_button->Render(),
+                    load_button->Render(),
+                    export_button->Render(),
+                    import_button->Render(),
+                }) | xflex | border,
+                filemenu->Render() | xflex | border,
             });
             return window(text(L"Buttons"), box);
         });
@@ -166,6 +201,8 @@ int main(int argc, const char* argv[]) {
             return window(text(L"Runtime Info"), box);
         });
 
+        Element display = loopdisplay(0.3, 0.1, 0.7);
+
         Component channelContainer = Container::Vertical({
             sliderContainer,
             buttonContainer,
@@ -178,10 +215,10 @@ int main(int argc, const char* argv[]) {
                 buttonRenderer->Render(),
                 toggleRenderer->Render(),
                 infoRenderer->Render(),
+                display,
             })  | border
                 | bold;
         });
-
     }; // ChannelUI
 
     ChannelUI left, right;
@@ -210,6 +247,8 @@ int main(int argc, const char* argv[]) {
         });
         return window(text(L"Lubadh"), box);
     });
+
+    
 
     screen.Loop(main_renderer);
 }
