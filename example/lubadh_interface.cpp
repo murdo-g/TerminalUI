@@ -201,7 +201,11 @@ int main(int argc, const char* argv[]) {
             return window(text(L"Runtime Info"), box);
         });
 
-        Element display = loopdisplay(0.3, 0.1, 0.7);
+        float progress=0.1, start=0.1, end=0.8;
+
+        // float start_fl = start_pos/8192;
+
+        // Element display = loopdisplay(&, 0.1, 0.7);
 
         Component channelContainer = Container::Vertical({
             sliderContainer,
@@ -210,12 +214,14 @@ int main(int argc, const char* argv[]) {
         });
 
         Component channelRenderer = Renderer(channelContainer, [this] {
+            float start_fl = start_pos/8192.f;
+            float end_fl = ((start_pos + length)%4096)/4096.f; 
             return vbox({
                 sliderRenderer->Render(),
                 buttonRenderer->Render(),
                 toggleRenderer->Render(),
                 infoRenderer->Render(),
-                display,
+                loopdisplay(progress, start_fl, end_fl),
             })  | border
                 | bold;
         });
