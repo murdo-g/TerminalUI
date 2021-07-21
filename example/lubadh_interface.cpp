@@ -203,10 +203,6 @@ int main(int argc, const char* argv[]) {
 
         float progress=0.1, start=0.1, end=0.8;
 
-        // float start_fl = start_pos/8192;
-
-        // Element display = loopdisplay(&, 0.1, 0.7);
-
         Component channelContainer = Container::Vertical({
             sliderContainer,
             buttonContainer,
@@ -214,7 +210,7 @@ int main(int argc, const char* argv[]) {
         });
 
         Component channelRenderer = Renderer(channelContainer, [this] {
-            float start_fl = start_pos/8192.f;
+            float start_fl = start_pos/4096.f;
             float end_fl = ((start_pos + length)%4096)/4096.f; 
             return vbox({
                 sliderRenderer->Render(),
