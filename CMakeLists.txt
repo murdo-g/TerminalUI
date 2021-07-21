@@ -126,4 +126,3 @@ target_link_libraries(lubadh_interface
  
 # C++17 is used. We requires fold expressions at least.
 set_target_properties(lubadh_interface PROPERTIES CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs")  

@@ -54,3 +54,7 @@ test/bin/
 
 # Demo binary
 terminalui-demo
+lubadh_interface
+
+# Vscode
+settings.json
