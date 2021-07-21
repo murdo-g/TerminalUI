@@ -43,22 +43,6 @@ class LoopDisplay : public Node {
     screen.at(start_int, y) = charset[0];
     screen.at(limit_int, y) = charset[11];
     screen.at(end_int, y) = charset[1];
-
-
-    // // 0 to start
-    // while (x < start_int)
-    //   screen.at(x++, y) = charset[0];
-    // // start to limit
-    // while (x < limit_int)
-    //   screen.at(x++, y) = charset[9];
-    // screen.at(x++, y) = charset[int(9 * (limit - limit_int))];
-    // // limit to end
-    // while (x < end_int)
-    //   screen.at(x++, y) = charset[0];
-    // // end
-    // screen.at(x++, y) = charset[4];
-    // while (x <= box_.x_max)
-    //   screen.at(x++, y) = charset[0];
   }
 
   float progress_, start_, end_;

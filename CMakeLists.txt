@@ -96,25 +96,25 @@ foreach(testSrc ${TEST_SRCS})
     )
 endforeach(testSrc)
 
-project(terminalui-demo
-  LANGUAGES CXX
-  VERSION 1.0.0
-)
+# project(terminalui-demo
+#   LANGUAGES CXX
+#   VERSION 1.0.0
+# )
 
-add_executable(terminalui-demo example/demo.cpp)
+# add_executable(terminalui-demo example/demo.cpp)
  
-target_link_libraries(terminalui-demo
-    PUBLIC
-    ${LIB_NAME}
-    PRIVATE ftxui::screen
-    PRIVATE ftxui::dom
-    PRIVATE ftxui::component # Not needed for this example.
-)
+# target_link_libraries(terminalui-demo
+#     PUBLIC
+#     ${LIB_NAME}
+#     PRIVATE ftxui::screen
+#     PRIVATE ftxui::dom
+#     PRIVATE ftxui::component # Not needed for this example.
+# )
  
-# C++17 is used. We requires fold expressions at least.
-set_target_properties(terminalui-demo PROPERTIES CXX_STANDARD 17)
+# # C++17 is used. We requires fold expressions at least.
+# set_target_properties(terminalui-demo PROPERTIES CXX_STANDARD 17)
 
-add_executable(lubadh_interface example/lubadh_interface.cpp)
+add_executable(lubadh_interface example/lubadh_demo.cpp)
  
 target_link_libraries(lubadh_interface
     PUBLIC
