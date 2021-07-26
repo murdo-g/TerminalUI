@@ -174,3 +174,67 @@ private:
     /** Get the current punch in mode controlled by @ref punch_in_mode_toggle */
     inline int getPunchInMode(){return punch_in_mode_selected;};
 };
+
+class MainDisplay {
+private:
+ 
+
+public:
+
+       /** UI for left channel */
+    ChannelUI left;
+
+    /** UI for right channel */
+    ChannelUI right;
+
+    ScreenInteractive screen = ScreenInteractive::Fullscreen();
+
+    int tab_index;
+
+    std::vector<std::wstring> tab_entries;
+
+    Component tab_selection;
+
+    Component tab_content;
+
+    Component main_container;
+
+    Component main_renderer;
+
+    MainDisplay();
+
+    ~MainDisplay(){};
+
+    inline Component getRenderer() { return main_renderer; };
+
+    void start();
+    //     ChannelUI left = ChannelUI();
+    //     ChannelUI right = ChannelUI();
+
+    //     ScreenInteractive screen = ScreenInteractive::Fullscreen();
+    //     int tab_index = 0;
+    //     std::vector<std::wstring> tab_entries = {
+    //         L"Left", L"Right",
+    //     };
+    //     Component tab_selection = Toggle(&tab_entries, &tab_index);
+    //     Component tab_content = Container::Tab(
+    //         {
+    //             left.getRenderer(),
+    //             right.getRenderer(),
+    //         },
+    //         &tab_index);
+
+    //     auto main_container = Container::Vertical({
+    //         tab_selection,
+    //         tab_content,
+    //     });
+
+    //     return Renderer(main_container, [&] {
+    //         Element box = vbox({
+    //             tab_selection->Render() | hcenter,
+    //             tab_content->Render() | flex,
+    //         });
+    //         return window(text(L"Lubadh"), box);
+    //     });
+    // };
+};

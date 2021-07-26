@@ -58,3 +58,6 @@ lubadh_interface
 
 # Vscode
 settings.json
+
+# Vagrant
+/.vagrant

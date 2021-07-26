@@ -171,3 +171,33 @@ ChannelUI::ChannelUI() {
             })  | border | bold;
         });
 }
+
+MainDisplay::MainDisplay() {
+    left = ChannelUI();
+    right = ChannelUI();
+    tab_index = 0;
+    tab_entries = {L"Left", L"Right",};
+    tab_selection = Toggle(&tab_entries, &tab_index);
+    tab_content = Container::Tab({
+        left.getRenderer(),
+        right.getRenderer(),
+    }, &tab_index);
+
+    main_container = Container::Vertical({
+        tab_selection,
+        tab_content,
+    });
+
+    main_renderer = Renderer(main_container, [&] {
+        Element box = vbox({
+            tab_selection->Render() | hcenter,
+            tab_content->Render() | flex,
+        });
+        return window(text(L"Lubadh"), box);
+    });
+}
+
+void MainDisplay::start() {
+    
+    screen.Loop(main_renderer);
+}
